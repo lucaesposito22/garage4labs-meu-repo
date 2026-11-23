@@ -24,7 +24,8 @@ export function criarReserva(reservas, pedido, agora = new Date()) {
   }
   if (fim <= inicio) return { status: 400, erro: 'O fim precisa ser depois do início' };
 
-  // TODO CA-3 (SPEC-001): reserva que começa no passado é recusada com 400. (Lab 1)
+  // CA-3 (SPEC-001): só é passado se inicio < agora (começar exatamente agora é permitido).
+  if (inicio < agora) return { status: 400, erro: 'Não é possível reservar no passado' };
   // TODO CA-2 (SPEC-001): conflito de horário na mesma sala é recusado com 409. (Lab 3, teste antes!)
 
   const reserva = {
